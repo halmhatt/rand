@@ -79,7 +79,10 @@ class Rand
 
 	# Return a base36 string
 	@base36: (length = 40) ->
-		str = @int(0, 36*length).toString(36)
+		str = ''
+
+		while str.length < length
+			str += @int(0, 36*length).toString(36)
 
 		return str.substr(0, length)
 
@@ -103,7 +106,7 @@ class Rand
 
 	# Return random rgba color
 	@rgba: ->
-		return 'rgba('+ @int(0, 255)+','+@int(0, 255)+','+@int(0, 255)+ ','+@random() + ')'
+		return 'rgba('+ @int(0, 255)+','+@int(0, 255)+','+@int(0, 255)+ ','+(@int(0, 100)/100) + ')'
 
 	# Return random date between min and max (1 year)
 	@date: (min = new Date(), max)->

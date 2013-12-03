@@ -98,7 +98,10 @@ Rand = (function() {
     if (length == null) {
       length = 40;
     }
-    str = this.int(0, 36 * length).toString(36);
+    str = '';
+    while (str.length < length) {
+      str += this.int(0, 36 * length).toString(36);
+    }
     return str.substr(0, length);
   };
 
@@ -124,7 +127,7 @@ Rand = (function() {
   };
 
   Rand.rgba = function() {
-    return 'rgba(' + this.int(0, 255) + ',' + this.int(0, 255) + ',' + this.int(0, 255) + ',' + this.random() + ')';
+    return 'rgba(' + this.int(0, 255) + ',' + this.int(0, 255) + ',' + this.int(0, 255) + ',' + (this.int(0, 100) / 100) + ')';
   };
 
   Rand.date = function(min, max) {
