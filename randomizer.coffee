@@ -2,7 +2,7 @@ class Randomizer
 	construct: ()->
 
 	# This is seen as a random number dependent on the distribution
-	seed: (distribution = 'constant') ->
+	@seed: (distribution = 'constant') ->
 		random = Math.random
 
 		switch(distribution)
@@ -33,7 +33,7 @@ class Randomizer
 				r = random()
 				return r*r
 
-	sanitize: (value, min = 0, max = 1) ->
+	@sanitize: (value, min = 0, max = 1) ->
 
 		if value < min then return min
 
@@ -42,7 +42,7 @@ class Randomizer
 		return value
 
 	# Return a random value between min and max
-	random: (min = 0, max = 1, distribution = 'constant') ->
+	@random: (min = 0, max = 1, distribution = 'constant') ->
 		random = Math.random
 		interval = max - min
 
