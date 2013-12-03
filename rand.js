@@ -144,6 +144,16 @@ Rand = (function() {
     return new Date(this.int(min.getTime(), max.getTime()));
   };
 
+  Rand.choose = function(arr) {
+    if (arr == null) {
+      arr = [];
+    }
+    if (arr.length > 0) {
+      return arr[this.int(0, arr.length)];
+    }
+    return null;
+  };
+
   return Rand;
 
 })();

@@ -56,6 +56,8 @@ Rand.hash();
 Rand.hash(32);
 ```
 
+#### Base 64
+Hash with lowercase, uppercase, numbers and +/
 ```js
 // A base64 encoded hash, 40 chars long (ex. "DbVUCEY5cTu9Tb9eMmWjuioKqM/bEUrMsR5rPjea")
 Rand.base64();
@@ -65,6 +67,8 @@ Rand.base64();
 Rand.base64(64);
 ```
 
+#### Base 36
+Hash with lowercase and numbers
 ```js
 // Random base36 encoded hash, 40 chars long (ex. "n0f4612gxtzi8z3w8fusgo12ihycnpcq711f134z")
 Rand.base36();
@@ -81,6 +85,20 @@ Rand.date();
 
 // A random date between two dates
 Rand.date(new Date('2013-05-12'), new Date('2014-02-21'));
+```
+
+### Choose from array
+You can make `Rand` choose a value from an array
+
+```js
+// Pick random item from array (ex. 'blue')
+Rand.choose(['red', 'green', 'blue', 'orange', 'pink']);
+
+// If you provide an empty array the function will return null
+Rand.choose([]); // null
+
+// Or even
+Rand.choose(); // null
 ```
 
 ### Colors

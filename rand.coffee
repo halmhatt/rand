@@ -121,3 +121,11 @@ class Rand
 			max.setFullYear(min.getFullYear() + 1)
 
 		return new Date(@int(min.getTime(), max.getTime()))
+
+	# Return random item from array
+	@choose: (arr = []) ->
+
+		if arr.length > 0
+			return arr[@int(0, arr.length)]
+
+		return null
