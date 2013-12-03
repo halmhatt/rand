@@ -5,6 +5,9 @@ A javascript class which provides random numbers with different distributions
 
 I will try to add images of the distributions soon
 
+### Download
+Please download [rand.js](rand.js) or [rand.coffee](rand.coffee) if you want to compile yourself.
+
 ## Usage
 ```js
 // Get a random number between 0 and 10 with "double exponential" 
