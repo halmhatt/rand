@@ -97,6 +97,9 @@ You can make `Rand` choose a value from an array
 // Pick random item from array (ex. 'blue')
 Rand.choose(['red', 'green', 'blue', 'orange', 'pink']);
 
+// Choose with a different distribution, (ex. 'red' most of the times)
+Rand.choose(['red', 'green', 'blue', 'orange', 'pink'], 'exponential')
+
 // If you provide an empty array the function will return null
 Rand.choose([]); // null
 

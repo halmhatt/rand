@@ -98,7 +98,7 @@ class Rand
 
 	# Return random character
 	@char: ->
-		return @base36(1)
+		return @int(10, 36).toString(36)
 
 	# Return random hexadecimal color
 	@color: ->
@@ -123,9 +123,26 @@ class Rand
 		return new Date(@int(min.getTime(), max.getTime()))
 
 	# Return random item from array
-	@choose: (arr = []) ->
+	@choose: (arr = [], distribution = 'constant') ->
 
 		if arr.length > 0
-			return arr[@int(0, arr.length)]
+			return arr[@int(0, arr.length, distribution)]
 
 		return null
+
+	# Generate password
+	@password: (length = 8, numbers = 2, specialChars = true) ->
+		str = ''
+
+		while str.length < 8
+
+			if str.length % Math.floor(length/numbers) is 0
+				str += @int(0, 9)
+				continue
+
+			if @bool(0.3)
+				str += @char().toUpperCase()
+			else
+				str += @char()
+
+		return str

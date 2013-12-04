@@ -1,0 +1,32 @@
+{
+  "name": "rand",
+  "version": "0.1.0",
+  "description": "A library to provide random data",
+  "main": "rand.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/halmhatt/rand.git"
+  },
+  "keywords": [
+    "js",
+    "random",
+    "coffee"
+  ],
+  "author": "Jacob Carlsson",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/halmhatt/rand/issues"
+  },
+  "homepage": "https://github.com/halmhatt/rand",
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "grunt-contrib-coffee": "~0.7.0",
+    "grunt-contrib-uglify": "~0.2.7"
+  }
+}
