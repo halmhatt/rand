@@ -3,8 +3,6 @@ Rand
 
 A javascript class which provides random numbers with different distributions
 
-I will try to add images of the distributions soon
-
 ### Download
 Please download [rand.js](rand.js) or [rand.coffee](rand.coffee) if you want to compile yourself.
 
@@ -123,3 +121,65 @@ Rand.char();
 ```
 
 ## Distributions
+The `Rand` library has some build in distributions that you can use in some functions, for example `Rand.random(min, max, distribution)`.
+
+Use a string identifier for the distribution, default is `random` which is random over the whole range.
+
+```js
+Rand.random(0, 1, 'random');
+```
+
+The distributions are shown in histograms below, meaning that the graphs represents the **probability of x** in 10 million runs. For example the `double-exponential` distibution where 0.5 has the highest probability of about 1.6%.
+
+
+### Double exponential
+The `double-exponential` or `stable` distribution has a sharp edge at 0-1 (middle of range, if you use Rand.random(0, 10) then the edge will be at 5) 
+and then dies out **exponential in both directions**
+
+![Double Exponential](img/double-exponential.png)
+
+To use this distribution use `double-exponential` or `stable` like so:
+
+```js
+Rand.random(0, 1, 'double-exponential');
+```
+
+### Exponential
+The `exponential` distribution dies out exponantially in one direction
+
+![Exponential](img/exponential.png)
+
+To use this distribution use `exponential` like so:
+
+```js
+Rand.random(0, 1, 'exponential');
+```
+
+### Survival
+The `survival` distribution is much like the `exponential` one, excep survival has another *"tail"*
+
+![Survival](img/survival.png)
+
+To use this distribution use `survival` like so:
+
+```js
+Rand.random(0, 1, 'survival');
+```
+
+### Linear
+`Rand` has 2 linear distributions, `linear-increase` and `linear-decrease`. 
+
+The `linear-increase` looks like this
+
+![Linear increase](img/linear-increase.png)
+
+And `linear-decrease` looks like this
+
+![Linear decrease](img/linear-decrease.png)
+
+To use these distributions use `linear-increase` or `linear-decrease` like so:
+
+```js
+Rand.random(0, 1, 'linear-increase');
+Rand.random(0, 1, 'linear-decrease');
+```
