@@ -132,6 +132,17 @@ Rand.random(0, 1, 'random');
 The distributions are shown in histograms below, meaning that the graphs represents the **probability of x** in 10 million runs. For example the `double-exponential` distibution where 0.5 has the highest probability of about 1.6%.
 
 
+### Normal
+The `normal` distribution has a bump in the middle, used a lot!
+
+![Normal distribution](img/normal.png)
+
+To use the `normal` distribution like so:
+
+```js
+Rand.random(0, 1, 'normal');
+```
+
 ### Double exponential
 The `double-exponential` or `stable` distribution has a sharp edge at 0-1 (middle of range, if you use Rand.random(0, 10) then the edge will be at 5) 
 and then dies out **exponential in both directions**
