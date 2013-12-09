@@ -34,7 +34,7 @@ Rand = (function() {
       case 'normal':
         u = random();
         v = random();
-        return (Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v) / 8) + 0.5;
+        return Math.sqrt(-2 * Math.log(u)) * (Math.cos(2 * Math.PI * v) / 8) + 0.5;
     }
   };
 

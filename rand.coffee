@@ -39,18 +39,11 @@ class Rand
 				return r*r
 
 			when 'normal'
-				#mean = 0.5
-				#standardDeviation = 0.5
-				#variance = standardDeviation*standardDeviation
-				#x = random()-0.5
 
 				u = random()
 				v = random()
 				
-				return (Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v)/8)+0.5
-
-				#return (1 / (Math.sqrt(2*Math.PI)))*Math.exp(-0.5*Math.pow(x, 2))
-				#return (1 / (standardDeviation*Math.sqrt(2*Math.PI)))*Math.exp(-Math.pow((x - mean), 2) / (2*variance))
+				return Math.sqrt(-2*Math.log(u)) * (Math.cos(2*Math.PI*v)/8) + 0.5
 
 	# Check that value is between min and max
 	@sanitize: (value, min = 0, max = 1) ->
