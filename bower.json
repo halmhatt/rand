@@ -1,0 +1,22 @@
+{
+  "name": "rand",
+  "description": "A library to provide random data",
+  "main": "rand.js",
+  "authors": [
+    "Jacob Carlsson"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "coffe",
+    "random"
+  ],
+  "homepage": "https://github.com/halmhatt/rand",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
