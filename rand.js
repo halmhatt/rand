@@ -189,3 +189,9 @@ Rand = (function() {
   return Rand;
 
 })();
+
+if ((typeof module !== "undefined" && module !== null) && (module.exports != null)) {
+  module.exports = Rand;
+} else {
+  window.Rand = Rand;
+}

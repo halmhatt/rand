@@ -20,7 +20,7 @@ class Rand
 			when 'double-exponential', 'stable'
 				return (random() - 0.5) * random() + 0.5
 
-			# Like the stable distribution but 
+			# Like the stable distribution but
 			# only in one direction (outdying) -> |:....
 			when 'exponential'
 				return random() * random()
@@ -42,7 +42,7 @@ class Rand
 
 				u = random()
 				v = random()
-				
+
 				return Math.sqrt(-2*Math.log(u)) * (Math.cos(2*Math.PI*v)/8) + 0.5
 
 	# Check that value is between min and max
@@ -153,3 +153,9 @@ class Rand
 				str += @char()
 
 		return str
+
+# Export
+if module? and module.exports?
+	module.exports = Rand;
+else
+	window.Rand = Rand;
