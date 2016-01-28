@@ -27,6 +27,13 @@ Rand.random();
 Rand.random(0, 1, 'constant');
 ```
 
+### Choose another random generator
+The library uses `Math.random` as default random number generator. But any function generating
+a decimal value between 0 and 1 can be used. To overwrite the default random generator write the following:
+```js
+Rand.randomGenerator = anotherRandomNumberGenerator;
+```
+
 ## Random values
 
 ### Boolean
