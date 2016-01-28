@@ -3,6 +3,8 @@ Rand
 
 A javascript class which provides random numbers with different distributions
 
+[![Build Status](https://travis-ci.org/halmhatt/rand.svg?branch=master)](https://travis-ci.org/halmhatt/rand)
+
 ### Download
 Please download [rand.min.js](rand.min.js) or [rand.coffee](rand.coffee) if you want to compile yourself.
 
