@@ -19,6 +19,7 @@
         "space-infix-ops": [1],
         "one-var": [1, {"const": "never", "let": "never"}],
         "max-len": [1, 80],
-        "indent": [1, 4, {"SwitchCase": 1}]
+        "indent": [1, 4, {"SwitchCase": 1}],
+        "brace-style": [1, "1tbs"]
     }
 }
