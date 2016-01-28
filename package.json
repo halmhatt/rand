@@ -7,7 +7,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jasmine"
   },
   "repository": {
     "type": "git",
@@ -27,6 +27,8 @@
   "devDependencies": {
     "grunt": "~0.4.2",
     "grunt-contrib-coffee": "~0.7.0",
-    "grunt-contrib-uglify": "~0.2.7"
+    "grunt-contrib-uglify": "~0.2.7",
+    "jasmine": "^2.4.1",
+    "lodash": "^4.0.1"
   }
 }

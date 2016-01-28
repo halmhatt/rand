@@ -2,11 +2,11 @@ var Rand,
   __slice = [].slice;
 
 Rand = (function() {
-  var BASE_64_CHARS, random;
+  var BASE_64_CHARS;
 
   function Rand() {}
 
-  random = Math.random;
+  Rand.randomGenerator = Math.random;
 
   BASE_64_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
 
@@ -18,22 +18,22 @@ Rand = (function() {
     switch (distribution) {
       case 'constant':
       case 'random':
-        return random();
+        return this.randomGenerator();
       case 'double-exponential':
       case 'stable':
-        return (random() - 0.5) * random() + 0.5;
+        return (this.randomGenerator() - 0.5) * this.randomGenerator() + 0.5;
       case 'exponential':
-        return random() * random();
+        return this.randomGenerator() * this.randomGenerator();
       case 'linear-decrease':
-        return 1 - Math.sqrt(random());
+        return 1 - Math.sqrt(this.randomGenerator());
       case 'linear-increase':
-        return Math.sqrt(random());
+        return Math.sqrt(this.randomGenerator());
       case 'survival':
-        r = random();
+        r = this.randomGenerator();
         return r * r;
       case 'normal':
-        u = random();
-        v = random();
+        u = this.randomGenerator();
+        v = this.randomGenerator();
         return Math.sqrt(-2 * Math.log(u)) * (Math.cos(2 * Math.PI * v) / 8) + 0.5;
     }
   };
@@ -65,7 +65,6 @@ Rand = (function() {
     if (distribution == null) {
       distribution = 'constant';
     }
-    random = Math.random;
     interval = max - min;
     seed = this.seed(distribution);
     return this.sanitize(min + seed * interval, min, max);
@@ -75,7 +74,7 @@ Rand = (function() {
     if (probability == null) {
       probability = 0.5;
     }
-    return random() >= probability;
+    return this.randomGenerator() >= probability;
   };
 
   Rand.int = function() {
@@ -172,7 +171,7 @@ Rand = (function() {
       specialChars = true;
     }
     str = '';
-    while (str.length < 8) {
+    while (str.length < length) {
       if (str.length % Math.floor(length / numbers) === 0) {
         str += this.int(0, 9);
         continue;

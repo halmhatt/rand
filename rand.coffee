@@ -1,7 +1,7 @@
 class Rand
 
 	# Function to use for random values
-	random = Math.random
+	@randomGenerator = Math.random
 
 	BASE_64_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
 
@@ -13,35 +13,35 @@ class Rand
 		switch(distribution)
 			# Constant distribution (random) -> .:.:..:..:
 			when 'constant', 'random'
-				return random()
+				return @randomGenerator()
 
 			# Stable distribution -> ..:|:..
 			# Sharp edge in the middle
 			when 'double-exponential', 'stable'
-				return (random() - 0.5) * random() + 0.5
+				return (@randomGenerator() - 0.5) * @randomGenerator() + 0.5
 
 			# Like the stable distribution but
 			# only in one direction (outdying) -> |:....
 			when 'exponential'
-				return random() * random()
+				return @randomGenerator() * @randomGenerator()
 
 			# Linear curve decresing
 			when 'linear-decrease'
-				return 1 - Math.sqrt(random())
+				return 1 - Math.sqrt(@randomGenerator())
 
 			# Linear curve incresing
 			when 'linear-increase'
-				return Math.sqrt(random())
+				return Math.sqrt(@randomGenerator())
 
 			# Birnbaum-Saunders survival function ish
 			when 'survival'
-				r = random()
+				r = @randomGenerator()
 				return r*r
 
 			when 'normal'
 
-				u = random()
-				v = random()
+				u = @randomGenerator()
+				v = @randomGenerator()
 
 				return Math.sqrt(-2*Math.log(u)) * (Math.cos(2*Math.PI*v)/8) + 0.5
 
@@ -56,7 +56,6 @@ class Rand
 
 	# Return a random value between min and max
 	@random: (min = 0, max = 1, distribution = 'constant') ->
-		random = Math.random
 		interval = max - min
 
 		# There are some different distributions
@@ -67,7 +66,7 @@ class Rand
 	# Return a boolean depending on the probability
 	# returns false with probability
 	@bool: (probability = 0.5) ->
-		return random() >= probability
+		return @randomGenerator() >= probability
 
 	# Return random int between min and max
 	# Just an alias for parseInt(random())
@@ -112,6 +111,7 @@ class Rand
 		return '#'+@hash(6)
 
 	# Return random rgba color
+	# TODO, use specified opacity
 	@rgba: ->
 		return 'rgba('+ @int(0, 255)+','+@int(0, 255)+','+@int(0, 255)+ ','+(@int(0, 100)/100) + ')'
 
@@ -141,7 +141,7 @@ class Rand
 	@password: (length = 8, numbers = 2, specialChars = true) ->
 		str = ''
 
-		while str.length < 8
+		while str.length < length
 
 			if str.length % Math.floor(length/numbers) is 0
 				str += @int(0, 9)
@@ -156,6 +156,6 @@ class Rand
 
 # Export
 if module? and module.exports?
-	module.exports = Rand;
+	module.exports = Rand
 else
-	window.Rand = Rand;
+	window.Rand = Rand
