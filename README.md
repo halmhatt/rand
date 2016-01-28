@@ -6,23 +6,23 @@ A javascript class which provides random numbers with different distributions
 [![Build Status](https://travis-ci.org/halmhatt/rand.svg?branch=master)](https://travis-ci.org/halmhatt/rand)
 
 ### Download
-Please download [rand.min.js](rand.min.js) or [rand.coffee](rand.coffee) if you want to compile yourself.
+Please download [rand.min.js](rand.min.js) or [rand.js](rand.js).
 
 ## Usage
 ```js
-// Get a random number between 0 and 10 with "double exponential" 
+// Get a random number between 0 and 10 with "double exponential"
 // distribution (ex. 0.4623468576464802)
-Rand.random(0, 10, 'double-exponential'); 
+Rand.random(0, 10, 'double-exponential');
 ```
 
 This is a distribution that has a high probability in the middle and then *"dies out"* in both directions.
-  
+
 To use the normal random function, use the *random* or *constant* distribution
 
 ```js
 // Just a random number between 0 and 1 (ex. 0.3653468576464802)
-Rand.random(); 
-  
+Rand.random();
+
 // Same as
 Rand.random(0, 1, 'constant');
 ```
@@ -41,7 +41,7 @@ Rand.bool(0.6);
 ### Integer
 ```js
 // A random integer between 0 and 1, ah yeah! (ex. 1 or 0)
-Rand.int(); 
+Rand.int();
 
 // A random integer between 0 and 26 (ex. 13)
 Rand.int(0, 26);
@@ -65,7 +65,7 @@ Hash with lowercase, uppercase, numbers and +/
 // A base64 encoded hash, 40 chars long (ex. "DbVUCEY5cTu9Tb9eMmWjuioKqM/bEUrMsR5rPjea")
 Rand.base64();
 
-// Or defined length (64 chars long) 
+// Or defined length (64 chars long)
 // (ex. "IfgBO2And5NnhDkC4l97ZyUWZI8/WEMqCv+mn/DFFurEsETYLihLK8plT4ni237A")
 Rand.base64(64);
 ```
@@ -146,7 +146,7 @@ Rand.random(0, 1, 'normal');
 ```
 
 ### Double exponential
-The `double-exponential` or `stable` distribution has a sharp edge at 0-1 (middle of range, if you use Rand.random(0, 10) then the edge will be at 5) 
+The `double-exponential` or `stable` distribution has a sharp edge at 0-1 (middle of range, if you use Rand.random(0, 10) then the edge will be at 5)
 and then dies out **exponential in both directions**
 
 ![Double Exponential](img/double-exponential.png)
@@ -180,7 +180,7 @@ Rand.random(0, 1, 'survival');
 ```
 
 ### Linear
-`Rand` has 2 linear distributions, `linear-increase` and `linear-decrease`. 
+`Rand` has 2 linear distributions, `linear-increase` and `linear-decrease`.
 
 The `linear-increase` looks like this
 
