@@ -1,194 +1,268 @@
-class Rand {
+'use strict';
 
-	// Function to use for random values
-	let random = window.random || Math.random;
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	let BASE_64_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	// This is seen as a random number dependent on the distribution
-	static seed(distribution = 'constant') {
+var BASE_64_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
 
-		switch((distribution) {)
-			// Constant distribution (random) -> .:.:..:..:
-			case 'constant': case 'random':
-				return random();
-				break;
+var Rand = function () {
+	function Rand() {
+		_classCallCheck(this, Rand);
+	}
 
-			// Stable distribution -> ..:|:..
-			// Sharp edge in the middle
-			case 'double-exponential': case 'stable':
-				return (random() - 0.5) * random() + 0.5;
-				break;
+	_createClass(Rand, null, [{
+		key: 'seed',
 
-			// Like the stable distribution but
-			// only in one direction (outdying) -> |:....
-			case 'exponential':
-				return random() * random();
-				break;
+		// This is seen as a random number dependent on the distribution
+		value: function seed() {
+			var distribution = arguments.length <= 0 || arguments[0] === undefined ? 'constant' : arguments[0];
 
-			// Linear curve decresing
-			case 'linear-decrease':
-				return 1 - Math.sqrt(random());
-				break;
+			switch (distribution) {
+				// Constant distribution (random) -> .:.:..:..:
+				case 'constant':case 'random':
+					return Rand.randomGenerator();
 
-			// Linear curve incresing
-			case 'linear-increase':
-				return Math.sqrt(random());
-				break;
+				// Stable distribution -> ..:|:..
+				// Sharp edge in the middle
+				case 'double-exponential':case 'stable':
+					return (Rand.randomGenerator() - 0.5) * Rand.randomGenerator() + 0.5;
 
-			// Birnbaum-Saunders survival function ish
-			case 'survival':
-				var r = random();
-				return r*r;
-				break;
+				// Like the stable distribution but
+				// only in one direction (outdying) -> |:....
+				case 'exponential':
+					return Rand.randomGenerator() * Rand.randomGenerator();
 
-			case 'normal':
+				// Linear curve decresing
+				case 'linear-decrease':
+					return 1 - Math.sqrt(Rand.randomGenerator());
 
-				var u = random();
-				var v = random();
+				// Linear curve incresing
+				case 'linear-increase':
+					return Math.sqrt(Rand.randomGenerator());
 
-				return Math.sqrt(-2*Math.log(u)) * (Math.cos(2*Math.PI*v)/8) + 0.5;
-				break;
+				// Birnbaum-Saunders survival function ish
+				case 'survival':
+					var r = Rand.randomGenerator();
+					return r * r;
+
+				case 'normal':
+
+					var u = Rand.randomGenerator();
+					var v = Rand.randomGenerator();
+
+					return Math.sqrt(-2 * Math.log(u)) * (Math.cos(2 * Math.PI * v) / 8) + 0.5;
+			}
 		}
-	}
 
-	// Check that value is between min and max
-	static sanitize(value, min = 0, max = 1) {
+		// Check that value is between min and max
 
-		if (value < min) { return min; }
+	}, {
+		key: 'sanitize',
+		value: function sanitize(value) {
+			var min = arguments.length <= 1 || arguments[1] === undefined ? 0 : arguments[1];
+			var max = arguments.length <= 2 || arguments[2] === undefined ? 1 : arguments[2];
 
-		if (value > max) { return max; }
+			if (value < min) {
+				return min;
+			}
 
-		return value;
-	}
+			if (value > max) {
+				return max;
+			}
 
-	// Return a random value between min and max
-	static random(min = 0, max = 1, distribution = 'constant') {
-		random = Math.random;
-		var interval = max - min;
+			return value;
+		}
 
-		# There are some different distributions
-		var seed = this.seed(distribution);
+		// Return a random value between min and max
 
-		return this.sanitize(min+seed * interval, min, max);
-	}
+	}, {
+		key: 'random',
+		value: function random() {
+			var min = arguments.length <= 0 || arguments[0] === undefined ? 0 : arguments[0];
+			var max = arguments.length <= 1 || arguments[1] === undefined ? 1 : arguments[1];
+			var distribution = arguments.length <= 2 || arguments[2] === undefined ? 'constant' : arguments[2];
 
-	// Return a boolean depending on the probability
-	// returns false with probability
-	static bool(probability = 0.5) {
-		return random() >= probability;
-	}
+			var interval = max - min;
 
-	// Return random int between min and max
-	// Just an alias for parseInt(random())
-	static int(...args) {
+			// There are some different distributions
+			var seed = Rand.seed(distribution);
 
-		return parseInt(this.random.apply(this, args));
-	}
+			return Rand.sanitize(min + seed * interval, min, max);
+		}
 
-	// A hash string values 0-f
-	static hash(length = 40) {
-		var str;
-		str = '',
+		// Return a boolean depending on the probability
+		// returns false with probability
 
-		(() => {
-			var result = [];
+	}, {
+		key: 'bool',
+		value: function bool() {
+			var probability = arguments.length <= 0 || arguments[0] === undefined ? 0.5 : arguments[0];
+
+			return Rand.randomGenerator() >= probability;
+		}
+
+		// Return random int between min and max
+		// Just an alias for parseInt(random())
+
+	}, {
+		key: 'int',
+		value: function int() {
+			return parseInt(Rand.random.apply(Rand, arguments));
+		}
+
+		// A hash string values 0-f
+
+	}, {
+		key: 'hash',
+		value: function hash() {
+			var length = arguments.length <= 0 || arguments[0] === undefined ? 40 : arguments[0];
+
+			var str;
+			str = '', function () {
+				var result = [];
+				while (str.length < length) {
+					result.push(str += Rand.int(0, 16).toString(16));
+				}
+				return result;
+			}();
+
+			return str.substr(0, length);
+		}
+
+		// Return a base36 string
+
+	}, {
+		key: 'base36',
+		value: function base36() {
+			var length = arguments.length <= 0 || arguments[0] === undefined ? 40 : arguments[0];
+
+			var str = '';
+
 			while (str.length < length) {
-				result.push(str += this.int(0, 16).toString(16));
-			}
-			return result;
-		})();
-
-		return str.substr(0, length);
-	}
-
-	// Return a base36 string
-	static base36(length = 40) {
-		var str = '';
-
-		while (str.length < length) {
-			str += this.int(0, 36*length).toString(36);
-		}
-
-		return str.substr(0, length);
-	}
-
-	// Return a base64 string
-	static base64(length = 40) {
-		var str = '';
-		var b = BASE_64_CHARS;
-
-		while (str.length < length) {
-			str += b[this.int(0, 64)];
-		}
-
-		return str.substr(0, length);
-	}
-
-	// Return random character
-	static char() {
-		return this.int(10, 36).toString(36);
-	}
-
-	// Return random hexadecimal color
-	static color() {
-		return '#'+this.hash(6);
-	}
-
-	// Return random rgba color
-	static rgba() {
-		let int = this.int
-		return `rgba(${int(0, 255)}, ${int(0, 255)}, ${int(0, 255)}, ${random()})`;
-	}
-
-	// Return random date between min and max (1 year)
-	static date(min = new Date(), max){
-
-		// Check if min is object or not
-		if (typeof min === 'number') {
-			min = new Date(min);
-		}
-
-		if (!max) {
-			// One year
-			max = new Date();
-			max.setFullYear(min.getFullYear() + 1);
-		}
-
-		return new Date(this.int(min.getTime(), max.getTime()));
-	}
-
-	// Return random item from array
-	static choose(arr = [], distribution = 'constant') {
-
-		if (arr.length > 0) {
-			return arr[this.int(0, arr.length, distribution)];
-		}
-
-		return null;
-	}
-
-	// Generate password
-	static password(length = 8, numbers = 2, specialChars = true) {
-		var str = '';
-
-		while (str.length < 8) {
-
-			if (str.length % Math.floor(length/numbers) === 0) {
-				str += this.int(0, 9);
-				continue;
-
-			if (this.bool(0.3)) {
-				str += this.char().toUpperCase();
-			} else {
-				str += this.char();
+				str += Rand.int(0, 36 * length).toString(36);
 			}
 
-		return str;
-	}
+			return str.substr(0, length);
+		}
+
+		// Return a base64 string
+
+	}, {
+		key: 'base64',
+		value: function base64() {
+			var length = arguments.length <= 0 || arguments[0] === undefined ? 40 : arguments[0];
+
+			var str = '';
+			var b = BASE_64_CHARS;
+
+			while (str.length < length) {
+				str += b[Rand.int(0, 64)];
+			}
+
+			return str.substr(0, length);
+		}
+
+		// Return random character
+
+	}, {
+		key: 'char',
+		value: function char() {
+			return Rand.int(10, 36).toString(36);
+		}
+
+		// Return random hexadecimal color
+
+	}, {
+		key: 'color',
+		value: function color() {
+			return '#' + Rand.hash(6);
+		}
+
+		// Return random rgba color
+
+	}, {
+		key: 'rgba',
+		value: function rgba() {
+			var int = Rand.int;
+			return 'rgba(' + int(0, 255) + ', ' + int(0, 255) + ', ' + int(0, 255) + ', ' + Rand.randomGenerator() + ')';
+		}
+
+		// Return random date between min and max (1 year)
+
+	}, {
+		key: 'date',
+		value: function date() {
+			var min = arguments.length <= 0 || arguments[0] === undefined ? new Date() : arguments[0];
+			var max = arguments[1];
+
+			// Check if min is object or not
+			if (typeof min === 'number') {
+				min = new Date(min);
+			}
+
+			if (!max) {
+				// One year
+				max = new Date();
+				max.setFullYear(min.getFullYear() + 1);
+			}
+
+			return new Date(Rand.int(min.getTime(), max.getTime()));
+		}
+
+		// Return random item from array
+
+	}, {
+		key: 'choose',
+		value: function choose() {
+			var arr = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
+			var distribution = arguments.length <= 1 || arguments[1] === undefined ? 'constant' : arguments[1];
+
+			if (arr.length > 0) {
+				return arr[Rand.int(0, arr.length, distribution)];
+			}
+
+			return null;
+		}
+
+		// Generate password
+
+	}, {
+		key: 'password',
+		value: function password() {
+			var length = arguments.length <= 0 || arguments[0] === undefined ? 8 : arguments[0];
+			var numbers = arguments.length <= 1 || arguments[1] === undefined ? 2 : arguments[1];
+
+			var str = '';
+
+			while (str.length < length) {
+
+				if (str.length % Math.floor(length / numbers) === 0) {
+					str += Rand.int(0, 9);
+					continue;
+				}
+
+				if (Rand.bool(0.3)) {
+					str += Rand.char().toUpperCase();
+				} else {
+					str += Rand.char();
+				}
+			}
+
+			return str;
+		}
+	}]);
+
+	return Rand;
+}();
+
+// Function to use for random values
+
+Rand.randomGenerator = Math.random;
 
 // Export
-if ((typeof module !== "undefined" && module !== null) && (module.exports != null)) {
+/* eslint no-undef: [0] */
+if (typeof module !== "undefined" && module !== null && module.exports != null) {
 	module.exports = Rand;
 } else {
 	window.Rand = Rand;
